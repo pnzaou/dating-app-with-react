@@ -28,7 +28,7 @@ const SignUpMethode = () => {
             <Link
               className="btn btn-wide text-white mt-12"
               style={btnStyle}
-              to="/"
+              to="/email-signup-methode"
             >
               Continuer avec mon email
             </Link>

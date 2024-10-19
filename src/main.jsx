@@ -4,6 +4,8 @@ import App from './App.jsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import SignUpMethode from './pages/SignUp-methode.jsx'
+import EmailSignupMethode from './pages/Email-signup-methode.jsx'
+import EmailVerification from './pages/Email-verification.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
   {
     path: '/signUp-methode',
     element: <SignUpMethode/>
+  },
+  {
+    path: '/email-signup-methode',
+    element: <EmailSignupMethode/>
+  },
+  {
+    path: '/email-verification',
+    element: <EmailVerification/>
   },
   {
     path: '*',
