@@ -6,7 +6,18 @@ const EmailVerification = () => {
     const [min, setMin] = useState(1)
     const [sec, setSec] = useState(59)
 
+    useEffect(() => {
+        const timer = setInterval(() => {
+            if (sec > 0) {
+                setSec(sec - 1);
+            } else if (min > 0) {
+                setMin(min - 1);
+                setSec(59);
+            }
+        }, 1000);
 
+        return () => clearInterval(timer);
+    }, [sec, min]);
     
     return (
         <div className="w-screen">
