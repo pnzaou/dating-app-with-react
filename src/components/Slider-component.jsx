@@ -3,7 +3,7 @@ import { Autoplay, Pagination } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
-import './css/Home-page-footer'
+import '../css/slide-pagination.css'
 
 const SliderComponent = () => {
 

@@ -6,6 +6,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import SignUpMethode from './pages/SignUp-methode.jsx'
 import EmailSignupMethode from './pages/Email-signup-methode.jsx'
 import EmailVerification from './pages/Email-verification.jsx'
+import SignupForm from './pages/Signup-form.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: '/email-verification',
     element: <EmailVerification/>
+  },
+  {
+    path: '/signUp-form',
+    element: <SignupForm/>
   },
   {
     path: '*',

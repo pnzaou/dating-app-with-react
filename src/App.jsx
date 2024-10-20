@@ -1,4 +1,4 @@
-import HomePageFooter from "./components/css/Home-page-footer"
+import HomePageFooter from "./components/Home-page-footer"
 import SliderComponent from "./components/Slider-component"
 
 function App() {
