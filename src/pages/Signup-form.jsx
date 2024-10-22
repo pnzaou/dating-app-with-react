@@ -27,6 +27,7 @@ const SignupForm = () => {
                             backgroundColor: "#E94057",
                             fontWeight: "bold",
                             fontSize: 16,
+                            width: 295
                         }}>
                             {step < 3? "Continuer" : "Soumettre"}
                         </button>
