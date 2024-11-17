@@ -19,7 +19,7 @@ const SignUpMethode = () => {
         <div></div>
         <div
           className="absolute flex flex-col items-center w-full"
-          style={{ top: 308 }}
+          style={{ top: 250 }}
         >
           <div>
             <h1 className="text-bold text-lg">Inscrivez-vous pour continuer</h1>

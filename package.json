@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.5.5",
     "axios": "^1.7.7",
     "jwt-decode": "^4.0.0",
     "prop-types": "^15.8.1",
@@ -19,6 +20,7 @@
     "react-hot-toast": "^2.4.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.27.0",
+    "react-tinder-card": "^1.6.4",
     "swiper": "^11.1.14"
   },
   "devDependencies": {

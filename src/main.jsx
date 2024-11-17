@@ -7,6 +7,7 @@ import SignUpMethode from './pages/SignUp-methode.jsx'
 import EmailSignupMethode from './pages/Email-signup-methode.jsx'
 import EmailVerification from './pages/Email-verification.jsx'
 import SignupForm from './pages/Signup-form.jsx'
+import AllowNotifications from './pages/Allow-notifications.jsx'
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: '/signUp-form',
     element: <SignupForm/>
+  },
+  {
+    path: '/allow-notifications',
+    element: <AllowNotifications/>
   },
   {
     path: '*',

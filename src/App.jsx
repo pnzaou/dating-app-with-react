@@ -3,11 +3,9 @@ import SliderComponent from "./components/Slider-component"
 
 function App() {
   return (
-    <div style={{
-      height: "100vh"
-    }}>
-      <SliderComponent/>
-      <HomePageFooter/>
+    <div className="h-screen">
+        <SliderComponent/>
+        <HomePageFooter/>
     </div>
   )
 }

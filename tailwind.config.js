@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        'int-cent': {'max': '384px'}, // Exemple pour un breakpoint maximum à 768px
+      },
+    },
   },
   plugins: [
     require('daisyui')

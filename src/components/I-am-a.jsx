@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 const IAmA = ({register, errors}) => {
     
     return (
-      <div className='mb-64'>
-        <div className="mt-32 ml-10">
+      <div className='mb-44'>
+        <div className="mt-10 ml-10">
           <h1 className="font-bold" style={{ fontSize: 30 }}>
             Je suis un(e)
           </h1>
@@ -15,7 +15,7 @@ const IAmA = ({register, errors}) => {
               type="radio"
               name="genre"
               value="femme"
-              {...register("genre", { required: "genre is required" })}
+              {...register("genre", { required: "veuillez sélectionner une option" })}
               className="peer hidden"
             />
             <div className={`peer-checked:bg-[#E94057] peer-checked:text-white peer-checked:font-bold border border-gray-300 rounded-2xl p-3 text-center ${errors.genre ? 'border-red-500' : 'text-gray-600'}`}>
@@ -28,7 +28,7 @@ const IAmA = ({register, errors}) => {
             type="radio"
             name="genre"
             value="homme"
-            {...register("genre", { required: "genre is required" })}
+            {...register("genre", { required: "veuillez sélectionner une option" })}
             className="peer hidden"
             />
             <div className={`peer-checked:bg-[#E94057] peer-checked:text-white peer-checked:font-bold border border-gray-300 rounded-2xl p-3 text-center ${errors.genre ? 'border-red-500' : 'text-gray-600'}`}>
@@ -41,7 +41,7 @@ const IAmA = ({register, errors}) => {
             type="radio"
             name="genre"
             value="autre"
-            {...register("genre", { required: "genre is required" })}
+            {...register("genre", { required: "Veuillez sélectionner un genre" })}
             className="peer hidden"
             />
             <div className={`peer-checked:bg-[#E94057] peer-checked:text-white peer-checked:font-bold border border-gray-300 rounded-2xl p-3 text-center ${errors.genre ? 'border-red-500' : 'text-gray-600'}`}>
