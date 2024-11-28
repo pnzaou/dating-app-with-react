@@ -1,11 +1,32 @@
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const EmailSignupMethode = () => {
-
-  const {register, handleSubmit, formState: {errors}} = useForm()
+  const [loading, setLoading] = useState(false)
+  const {register, handleSubmit, setValue, formState: {errors}} = useForm()
 
   const onSubmit = async (data) => {
-    
+    try {
+      setLoading(true)
+      const rep = await axios.post("http://localhost:8080/api/personnes/signup-request", data)
+      setLoading(false)
+      setValue("email", "")
+      toast.success(rep.data.message)
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
+
+  if(loading) {
+    return (
+      <div className="flex w-screen h-screen justify-center items-center">
+        <div>
+          <span className="loading loading-dots loading-md"></span>
+        </div>
+      </div>
+    )
   }
 
     return (

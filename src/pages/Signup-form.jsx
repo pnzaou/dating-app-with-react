@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfilDetails from "../components/Profil-details";
 import { useForm } from "react-hook-form";
 import IAmA from "../components/I-am-a";
@@ -6,7 +6,34 @@ import Interests from "../components/Interests";
 
 const SignupForm = () => {
     const [ step, setStep ] = useState(1)
+    const [location, setLocation] = useState({ latitude: null, longitude: null });
+    const [error, setError] = useState("");
     const {register, handleSubmit, formState: {errors}} = useForm()
+
+    useEffect(() => {
+        const requestLocation = () => {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  // Mise à jour du state avec la localisation de l'utilisateur
+                  setLocation({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                  });
+                },
+                (err) => {
+                  // Gestion des erreurs (ex : refus de l'utilisateur)
+                  setError(err.message);
+                }
+              );
+            } else {
+              setError("La géolocalisation n'est pas prise en charge par ce navigateur.");
+            }
+        };
+      
+        requestLocation();
+
+    },[])
 
     const stepBack = () => {
         setStep(step - 1)

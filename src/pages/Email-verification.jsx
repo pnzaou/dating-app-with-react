@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VerificationCodeForm from "../components/verification-code-form";
+import toast from "react-hot-toast";
 
 const EmailVerification = () => {
     const [min, setMin] = useState(1)
     const [sec, setSec] = useState(59)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -15,6 +17,12 @@ const EmailVerification = () => {
                 setSec(59);
             }
         }, 1000);
+
+        if (min === 0 && sec === 0) {
+            clearInterval(timer);
+            navigate("/email-signup-methode");
+            toast.error("Les 2 minutes sont écoulées.")
+        }
 
         return () => clearInterval(timer);
     }, [sec, min]);
