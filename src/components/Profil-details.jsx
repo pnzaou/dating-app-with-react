@@ -41,10 +41,11 @@ const ProfilDetails = ({ register, errors }) => {
                 id="inputfile"
                 type="file"
                 accept="image/*"
+                multiple
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer rounded-full"
                 onChange={handleImageChange}
-                {...register("photo", {
-                required: "Veuillez ajouter une image de vous",
+                {...register("photos", {
+                required: "Veuillez ajouter des photos de vous",
                 })}
                 />
 
@@ -54,9 +55,9 @@ const ProfilDetails = ({ register, errors }) => {
                 </div>
             </div>
           </div>
-          {errors.photo && (
+          {errors.photos && (
               <span className="mt-2 text-sm text-red-500">
-                {errors.photo.message}
+                {errors.photos.message}
               </span>
             )}
           <div style={{ width: 295 }} className="mt-10">
@@ -93,7 +94,7 @@ const ProfilDetails = ({ register, errors }) => {
             <input
               type="date"
               placeholder="Votre date de naissance"
-              {...register("date", {
+              {...register("dateDeNaissance", {
                 required: "Veuillez renseigner votre date de naissance",
               })}
               className="input input-bordered w-full max-w-xs"

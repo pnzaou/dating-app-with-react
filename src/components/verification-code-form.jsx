@@ -28,7 +28,7 @@ const VerificationCodeForm = () => {
                 console.log(rep.data.lien);
             } catch (error) {
                 toast.error(error.response.data.message)
-                if(error.response.data.Lien){
+                if(error.response.data.redirect){
                     navigate(error.response.data.lien)
                 }
             }

@@ -1,47 +1,80 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ProfilDetails from "../components/Profil-details";
 import { useForm } from "react-hook-form";
 import IAmA from "../components/I-am-a";
 import Interests from "../components/Interests";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+import PasswordStep from "../components/Password-step";
 
 const SignupForm = () => {
     const [ step, setStep ] = useState(1)
-    const [location, setLocation] = useState({ latitude: null, longitude: null });
-    const [error, setError] = useState("");
-    const {register, handleSubmit, formState: {errors}} = useForm()
+    const {register, handleSubmit, formState: {errors}, watch} = useForm()
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
 
-    useEffect(() => {
-        const requestLocation = () => {
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(
-                (position) => {
-                  // Mise à jour du state avec la localisation de l'utilisateur
-                  setLocation({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                  });
-                },
-                (err) => {
-                  // Gestion des erreurs (ex : refus de l'utilisateur)
-                  setError(err.message);
-                }
-              );
-            } else {
-              setError("La géolocalisation n'est pas prise en charge par ce navigateur.");
-            }
-        };
-      
-        requestLocation();
-
-    },[])
+    const password = watch("password")
 
     const stepBack = () => {
         setStep(step - 1)
     }
 
+    const getCurrentLocation = () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    position => {
+                        resolve({
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude,
+                        });
+                    },
+                    error => {
+                        reject(new Error("Localisation non disponible : " + error.message));
+                    }
+                );
+            } else {
+                reject(new Error("La géolocalisation n'est pas supportée."));
+            }
+        });
+    };
+
     const onSubmit = async (data) => {
-        if(step < 3) {
-            setStep(step + 1)
+        try {
+            if(step < 4) {
+                setStep(step + 1)
+            } else {
+                
+                const formData = new FormData()
+    
+                formData.append("email", jwtDecode(token).email)
+
+                Object.keys(data).forEach(key => {
+                    if(key !== 'photos'){
+                        formData.append(key, data[key])
+                    }
+                })
+    
+                if(data.photos && data.photos.length > 0) {
+                    Array.from(data.photos).forEach(photo => {
+                        formData.append("photos", photo)
+                    })
+                }
+    
+                try {
+                    const location = await getCurrentLocation();
+                    formData.append("latitude", location.latitude);
+                    formData.append("longitude", location.longitude);
+                } catch (error) {
+                    console.warn(error.message);
+                }
+    
+                const rep = await axios.post("http://localhost:8080/api/personnes/signup", formData)
+                console.log(rep);
+            }
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Erreur lors de l'inscription ! Veuillez réessayer.");
         }
     }
     
@@ -61,7 +94,7 @@ const SignupForm = () => {
                     </div>
                 </div>
             )}
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
                 {step === 1 && (
                     <ProfilDetails register={register} errors={errors}/>
                 )}
@@ -71,6 +104,9 @@ const SignupForm = () => {
                 {step === 3 && (
                     <Interests register={register} errors={errors}/>
                 )}
+                {step === 4 && (
+                    <PasswordStep register={register} errors={errors} password={password}/>
+                )}
                 <div className="flex justify-center w-screen">
                     <div className="">
                         <button className="btn btn-wide text-white" style={{
@@ -79,7 +115,7 @@ const SignupForm = () => {
                             fontSize: 16,
                             width: 295
                         }}>
-                            {step < 3? "Continuer" : "Soumettre"}
+                            {step < 4? "Continuer" : "Soumettre"}
                         </button>
                     </div>
                 </div>

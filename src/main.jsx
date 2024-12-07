@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
+import { QueryClient, QueryClientProvider } from 'react-query'
 import App from './App.jsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
@@ -9,6 +10,8 @@ import EmailSignupMethode from './pages/Email-signup-methode.jsx'
 import EmailVerification from './pages/Email-verification.jsx'
 import SignupForm from './pages/Signup-form.jsx'
 import AllowNotifications from './pages/Allow-notifications.jsx'
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -48,6 +51,8 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Toaster />
-    <RouterProvider router={router}/>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router}/> 
+    </QueryClientProvider>
   </StrictMode>,
 )

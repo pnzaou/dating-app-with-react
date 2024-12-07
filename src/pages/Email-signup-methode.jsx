@@ -6,6 +6,7 @@ import { useState } from "react";
 const EmailSignupMethode = () => {
   const [loading, setLoading] = useState(false)
   const {register, handleSubmit, setValue, formState: {errors}} = useForm()
+  const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
 
   const onSubmit = async (data) => {
     try {
@@ -57,8 +58,10 @@ const EmailSignupMethode = () => {
                   <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                 </svg>
                 <input type="text" className="grow" placeholder="Email" {...register("email", {
-                  required: "Veuillez saisir votre adresse mail"
+                  required: "Veuillez saisir votre adresse mail",
+                  pattern: emailRegex
                 })} />
+                <input type="text" value="web" {...register("environnement")} hidden/>
               </label>
                 {errors.email && (
                   <span className="text-red-500 text-sm mt-2">{errors.email.message}</span>
