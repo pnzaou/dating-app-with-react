@@ -7,6 +7,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 import PasswordStep from "../components/Password-step";
+import IAmInterestedBy from "../components/i-am-interested-by";
+import Relations from "./Relations";
 
 const SignupForm = () => {
     const [ step, setStep ] = useState(1)
@@ -41,8 +43,9 @@ const SignupForm = () => {
     };
 
     const onSubmit = async (data) => {
+        console.log(data);
         try {
-            if(step < 4) {
+            if(step < 6) {
                 setStep(step + 1)
             } else {
                 
@@ -102,9 +105,15 @@ const SignupForm = () => {
                     <IAmA register={register} errors={errors}/>
                 )}
                 {step === 3 && (
-                    <Interests register={register} errors={errors}/>
+                    <IAmInterestedBy register={register} errors={errors}/>
                 )}
                 {step === 4 && (
+                    <Relations register={register} errors={errors}/>
+                )}
+                {step === 5 && (
+                    <Interests register={register} errors={errors}/>
+                )}
+                {step === 6 && (
                     <PasswordStep register={register} errors={errors} password={password}/>
                 )}
                 <div className="flex justify-center w-screen">
@@ -115,7 +124,7 @@ const SignupForm = () => {
                             fontSize: 16,
                             width: 295
                         }}>
-                            {step < 4? "Continuer" : "Soumettre"}
+                            {step < 6? "Continuer" : "Soumettre"}
                         </button>
                     </div>
                 </div>

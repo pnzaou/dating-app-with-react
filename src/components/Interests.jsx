@@ -33,7 +33,7 @@ const Interests = ({register, errors}) => {
   }
 
     return (
-      <div className="mb-[86px]">
+      <div className="mb-[55px]">
         <div className="mt-10 ml-10">
           <h1 className="font-bold" style={{ fontSize: 30 }}>
             Vos centre d&apos;intérêts
@@ -46,22 +46,22 @@ const Interests = ({register, errors}) => {
         <div className="h-[250px] overflow-y-auto mt-5 grid grid-cols-2 justify-items-center px-12 int-cent:px-2 gap-y-[12px]">
           {data?.map(CI => (
             <div className="w-[140px]" key={CI._id}>
-            <label className="cursor-pointer">
-              <input
-                type="checkbox"
-                value={CI._id}
-                {...register("centreInteretId", { required: "genre is required" })}
-                className="peer hidden"
-              />
-              <div
-                className={`peer-checked:bg-[#E94057] peer-checked:text-white peer-checked:font-bold border border-gray-300 rounded-2xl p-3 text-center ${
-                  errors.genre ? "border-red-500" : "text-gray-600"
-                }`}
-              >
-                {CI.nom}
-              </div>
-            </label>
-          </div>
+              <label className="cursor-pointer">
+                <input
+                  type="checkbox"
+                  value={CI._id}
+                  {...register("centreInteretId", { required: "Veuillez sélectionner au moins une des options" })}
+                  className="peer hidden"
+                />
+                <div
+                  className={`peer-checked:bg-[#E94057] peer-checked:text-white peer-checked:font-bold border border-gray-300 rounded-2xl p-3 text-center ${
+                    errors.centreInteretId ? "border-red-500" : "text-gray-600"
+                  }`}
+                >
+                  {CI.nom}
+                </div>
+              </label>
+            </div>
           ))}
         </div>
       </div>
