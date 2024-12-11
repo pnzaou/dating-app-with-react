@@ -22,7 +22,7 @@ const HomePageFooter = () => {
             </div>
             <div className="mt-7">
                 <p>
-                    Vous avez déjà un compte ? <Link to="" style={linkStyle}>Se connecter</Link>
+                    Vous avez déjà un compte ? <Link to="/signIn" style={linkStyle}>Se connecter</Link>
                 </p>
             </div>
         </div>

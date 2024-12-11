@@ -10,6 +10,7 @@ import EmailSignupMethode from './pages/Email-signup-methode.jsx'
 import EmailVerification from './pages/Email-verification.jsx'
 import SignupForm from './pages/Signup-form.jsx'
 import AllowNotifications from './pages/Allow-notifications.jsx'
+import SignIn from './pages/SignIn.jsx'
 
 const queryClient = new QueryClient()
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
   {
     path: '/allow-notifications',
     element: <AllowNotifications/>
+  },
+  {
+    path: '/signIn',
+    element: <SignIn/>
   },
   {
     path: '*',
