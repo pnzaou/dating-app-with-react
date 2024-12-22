@@ -91,7 +91,7 @@ const SignupForm = () => {
                     }}  onClick={stepBack}>
                         <img
                             src="img/back-svgrepo-com.svg"
-                            alt="Facebook"
+                            alt="Icon de retour"
                             className="w-8 h-8"
                         />
                     </div>
