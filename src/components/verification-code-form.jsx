@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {handleInput, handleKeyDown} from "../services/verification-code-services";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { axiosInstance } from "../libs/axios";
 
 const VerificationCodeForm = () => {
     const hiddenInputRef = useRef(null)
@@ -22,7 +22,7 @@ const VerificationCodeForm = () => {
         const sendCode = async () => {
             const digitCode = code.join("")
             try {
-                const rep = await axios.post(`http://localhost:8080/api/personnes/signup-email-confirm?token=${token}`, {digitCode})
+                const rep = await axiosInstance.post(`/api/personnes/signup-email-confirm?token=${token}`, {digitCode})
                 navigate(rep.data.lien)
                 toast.success(rep.data.message)
                 console.log(rep.data.lien);

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { axiosInstance } from "../libs/axios";
 
 const EmailSignupMethode = () => {
   const [loading, setLoading] = useState(false)
@@ -11,7 +11,7 @@ const EmailSignupMethode = () => {
   const onSubmit = async (data) => {
     try {
       setLoading(true)
-      const rep = await axios.post("http://localhost:8080/api/personnes/signup-request", data)
+      const rep = await axiosInstance.post("/api/personnes/signup-request", data)
       setLoading(false)
       setValue("email", "")
       toast.success(rep.data.message)

@@ -1,11 +1,11 @@
-import axios from "axios";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import { axiosInstance } from "../libs/axios";
 
 const Relations = ({register, errors}) => {
   
   const {data, isLoading, isError, refetch} = useQuery("RelationData", async () => {
-    const rep = await axios.get("http://localhost:8080/api/relations")
+    const rep = await axiosInstance.get("/api/relations")
     return rep.data.data
   })
 

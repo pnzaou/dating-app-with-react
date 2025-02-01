@@ -3,13 +3,13 @@ import ProfilDetails from "../components/Profil-details";
 import { useForm } from "react-hook-form";
 import IAmA from "../components/I-am-a";
 import Interests from "../components/Interests";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 import PasswordStep from "../components/Password-step";
 import IAmInterestedBy from "../components/i-am-interested-by";
 import Relations from "./Relations";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../libs/axios";
 
 const SignupForm = () => {
     const [ step, setStep ] = useState(1)
@@ -74,7 +74,7 @@ const SignupForm = () => {
                     console.warn(error.message);
                 }
     
-                const rep = await axios.post("http://localhost:8080/api/personnes/signup", formData)
+                const rep = await axiosInstance.post("/api/personnes/signup", formData)
 
                 Object.keys(data).forEach(key => setValue(key, null))
 

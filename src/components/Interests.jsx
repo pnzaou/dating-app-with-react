@@ -1,11 +1,11 @@
-import axios from "axios";
 import PropTypes from "prop-types";
 import { useQuery } from "react-query";
+import { axiosInstance } from "../libs/axios";
 
 const Interests = ({register, errors}) => {
   
   const {data, isLoading, isError, refetch} = useQuery("CIData", async () => {
-    const rep = await axios.get("http://localhost:8080/api/centres-dinterets")
+    const rep = await axiosInstance.get("/api/centres-dinterets")
     return rep.data.CI
   })
 

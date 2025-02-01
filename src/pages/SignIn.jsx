@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/useAuthStore";
 
 
 const SignIn = () => {
@@ -10,22 +9,15 @@ const SignIn = () => {
     const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
     const mdpRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/
     const {register, handleSubmit, setValue, formState: {errors}} = useForm()
+    const { login } = useAuthStore()
+    const navigate = useNavigate()
 
     const onSubmit = async (data) => {
         setLoading(true)
-        try {
-            const rep = await axios.post("http://localhost:8080/api/personnes/signin", data)
-            setValue("email", "")
-            setValue("password", "")
-            setLoading(false)
-            toast.success(rep.data.message)
-            console.log(rep.data.token);
-        } catch (error) {
-            setLoading(false)
-            toast.error(error.response 
-                ? error.response.data.message
-                : "Une erreur s'est produite. Veuillez réessayer."
-            )
+        const isLogin = await login(data, setValue, setLoading)
+        
+        if(isLogin) {
+            navigate("/home-page")
         }
     }
 

@@ -11,6 +11,8 @@ import EmailVerification from './pages/Email-verification.jsx'
 import SignupForm from './pages/Signup-form.jsx'
 import AllowNotifications from './pages/Allow-notifications.jsx'
 import SignIn from './pages/SignIn.jsx'
+import ProtectedRoute from './components/Protected-route.jsx'
+import Discover from './pages/Discover.jsx'
 
 const queryClient = new QueryClient()
 
@@ -46,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: '/signIn',
     element: <SignIn/>
+  },
+  {
+    path: "/home-page",
+    element: <ProtectedRoute><Discover/></ProtectedRoute>
   },
   {
     path: '*',
