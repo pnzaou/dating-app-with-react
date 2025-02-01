@@ -13,10 +13,10 @@ const SignIn = () => {
 
     const onSubmit = async (data) => {
         setLoading(true)
-        setValue("email", "")
-        setValue("password", "")
         try {
             const rep = await axios.post("http://localhost:8080/api/personnes/signin", data)
+            setValue("email", "")
+            setValue("password", "")
             setLoading(false)
             toast.success(rep.data.message)
             console.log(rep.data.token);

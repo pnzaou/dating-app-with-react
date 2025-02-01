@@ -16,6 +16,8 @@ const EmailSignupMethode = () => {
       setValue("email", "")
       toast.success(rep.data.message)
     } catch (error) {
+      setValue("email", "")
+      setLoading(false)
       toast.error(error.response.data.message)
     }
   }

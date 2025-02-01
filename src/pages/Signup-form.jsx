@@ -9,12 +9,14 @@ import { jwtDecode } from "jwt-decode";
 import PasswordStep from "../components/Password-step";
 import IAmInterestedBy from "../components/i-am-interested-by";
 import Relations from "./Relations";
+import { useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
     const [ step, setStep ] = useState(1)
-    const {register, handleSubmit, formState: {errors}, watch} = useForm()
+    const {register, handleSubmit, formState: {errors}, watch, setValue} = useForm()
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    const navigate = useNavigate()
 
     const password = watch("password")
 
@@ -43,7 +45,6 @@ const SignupForm = () => {
     };
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             if(step < 6) {
                 setStep(step + 1)
@@ -74,7 +75,13 @@ const SignupForm = () => {
                 }
     
                 const rep = await axios.post("http://localhost:8080/api/personnes/signup", formData)
-                console.log(rep);
+
+                Object.keys(data).forEach(key => setValue(key, null))
+
+                if(rep.status === 201) {
+                    navigate("/signIn")
+                    toast.success(rep.data.message)
+                }
             }
         } catch (error) {
             toast.error(error.response?.data?.message || "Erreur lors de l'inscription ! Veuillez réessayer.");
